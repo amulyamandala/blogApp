@@ -19,6 +19,8 @@ import {
 
 function AdminProfile() {
   const currentUser = useAuth((state) => state.currentUser);
+  const logout = useAuth((state) => state.logout);
+  const navigate = useNavigate();
   const [view, setView] = useState("users");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -89,7 +91,7 @@ function AdminProfile() {
             <h1 className="text-3xl font-semibold text-[#1d1d1f]">Welcome, {currentUser?.firstName}</h1>
             <p className={mutedText}>Manage users, review articles and control user access.</p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 items-center">
             <button
               className={view === "users" ? primaryBtn : secondaryBtn}
               onClick={() => setView("users")}
@@ -101,6 +103,9 @@ function AdminProfile() {
               onClick={() => setView("articles")}
             >
               Articles
+            </button>
+            <button className={ghostBtn} onClick={handleLogout}>
+              Logout
             </button>
           </div>
         </div>
