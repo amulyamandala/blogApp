@@ -1,6 +1,7 @@
 import { useAuth } from "../store/authStore";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   pageWrapper,
   secondaryBtn,
@@ -24,6 +25,11 @@ function AdminProfile() {
   const [users, setUsers] = useState([]);
   const [articles, setArticles] = useState([]);
   const [updatingUserId, setUpdatingUserId] = useState(null);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/register");
+  };
 
   const fetchAdminData = async () => {
     setLoading(true);
