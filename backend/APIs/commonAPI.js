@@ -117,7 +117,6 @@ CommonApp.put("/password",verifyToken("USER","AUTHOR","ADMIN"),async(req,res)=>{
   if(!user){
     return res.status(404).json({message:"user not found"})
   }
-
   //check current password
   const isPasswordValid=await compare(password,user.password)
 
