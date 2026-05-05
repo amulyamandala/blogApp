@@ -22,7 +22,7 @@ function Home() {
       setLoading(true);
       try {
         // Fetch all published articles
-        let res = await axios.get("http://localhost:5000/user-api/articles", { withCredentials: true });
+        let res = await axios.get("https://blogapp-xgks.onrender.com/user-api/articles", { withCredentials: true });
         if (res.status === 200) {
           setArticles(res.data.payload);
         }

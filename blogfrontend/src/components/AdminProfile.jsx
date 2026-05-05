@@ -38,8 +38,8 @@ function AdminProfile() {
     setError(null);
     try {
       const [usersRes, articlesRes] = await Promise.all([
-        axios.get("http://localhost:5000/admin-api/users", { withCredentials: true }),
-        axios.get("http://localhost:5000/admin-api/articles", { withCredentials: true }),
+        axios.get("https://blogapp-xgks.onrender.com/admin-api/users", { withCredentials: true }),
+        axios.get("https://blogapp-xgks.onrender.com/admin-api/articles", { withCredentials: true }),
       ]);
 
       setUsers(usersRes.data.payload || []);
@@ -66,7 +66,7 @@ function AdminProfile() {
     setUpdatingUserId(user._id);
     try {
       await axios.patch(
-        `http://localhost:5000/admin-api/user/${user._id}`,
+        `https://blogapp-xgks.onrender.com/admin-api/user/${user._id}`,
         { _id: user._id, isActive: !user.isActive },
         { withCredentials: true }
       );
