@@ -14,7 +14,7 @@ const port=process.env.PORT || 5000
 app.use(exp.json())
 app.use(CookieParser())
 app.use(cors({
-    origin:['http://localhost:5173', 'http://localhost:5176', 'http://localhost:5000'],
+    origin:['http://localhost:5173', 'http://localhost:5176', 'http://localhost:5000', 'https://blog-3hj4crvfb-amulyamandala007-gmailcoms-projects.vercel.app'],
     credentials:true,
 }))
 app.use("/user-api",UserApp)
