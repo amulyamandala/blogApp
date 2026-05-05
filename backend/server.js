@@ -27,7 +27,8 @@ try{
     console.log("db connected");
     app.listen(port,()=>console.log(`server is started on ${port}`))
 }catch(err){
-    console.log("error");
+    console.error("DB connection failed:", err);
+    process.exit(1);
 }
 }
 connectDB()
