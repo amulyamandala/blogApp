@@ -40,8 +40,8 @@ CommonApp.post("/common",upload.single("profileImageUrl"),async(req,res)=>{
         const token=sign({id:newUserDoc._id,email:newUserDoc.email,role:newUserDoc.role},process.env.JWT_SECRET,{expiresIn:"1h"});
         res.cookie("token",token,{
             httpOnly:true,
-            sameSite:"lax",
-            secure:false,
+            sameSite:process.env.NODE_ENV === "production" ? "none" : "lax",
+            secure:process.env.NODE_ENV === "production",
         })
         
         //send user data without password
@@ -70,8 +70,8 @@ CommonApp.post("/login",async(req,res)=>{
     const token=sign({id:user._id,email:user.email,role:user.role},process.env.JWT_SECRET,{expiresIn:"1h"});
     res.cookie("token",token,{//http only cookie
         httpOnly:true,
-        sameSite:"lax",
-        secure:false,})
+        sameSite:process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure:process.env.NODE_ENV === "production",})
         //to delete the pass word 
         let userObj=user.toObject()
         delete userObj.password
@@ -81,8 +81,8 @@ CommonApp.post("/login",async(req,res)=>{
 CommonApp.get("/logout",(req,res)=>{
   res.clearCookie("token",{
     httpOnly:true,
-    sameSite:"lax",
-    secure:false,
+    sameSite:process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure:process.env.NODE_ENV === "production",
   })
   res.status(200).json({message:"logout successfull"})
 })
