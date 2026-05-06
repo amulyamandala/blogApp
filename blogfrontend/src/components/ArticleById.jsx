@@ -113,9 +113,8 @@ function ArticleByID() {
     //add artcileId
     commentObj.articleId = article._id;
     console.log(commentObj);
-    let res = await axios.put("/user-api/articles", commentObj, { withCredentials: true });
-    if (res.status ==piClient.put("/user-api/articles", commentObj
-      
+    let res = await apiClient.put("/user-api/articles", commentObj);
+    if (res.status === 200) {
       setArticle(res.data.payload);
     }
   };
