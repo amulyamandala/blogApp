@@ -1,3 +1,6 @@
+import axios from "axios";
+import { create } from "zustand";
+
 const API = "https://blogapp-xgks.onrender.com";
 
 export const useAuth = create((set) => ({

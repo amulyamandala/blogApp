@@ -13,7 +13,7 @@ import {
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
-import axios from "axios";
+import apiClient from "../api/axiosConfig";
 
 function Register() {
   const {
@@ -49,7 +49,7 @@ function Register() {
       //start loading
       setLoading(true);
       //make HTTP POST req to create User in backend
-      let res = await axios.post("https://blogapp-xgks.onrender.com/common-api/common", formData,{withCredentials:true});
+      let res = await apiClient.post("/common-api/common", formData);
 
       if (res.status === 201) {
         //navigate based on role

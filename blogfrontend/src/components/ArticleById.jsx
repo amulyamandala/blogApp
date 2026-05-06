@@ -1,6 +1,6 @@
 import { useParams, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from "../api/axiosConfig";
 import { useAuth } from "../store/authStore.js";
 import {
   articlePageWrapper,
@@ -50,7 +50,7 @@ function ArticleByID() {
       setLoading(true);
 
       try {
-        const res = await axios.get(`/user-api/article/${id}`, { withCredentials: true });
+        const res = await apiClient.get(`/user-api/article/${id}`);
 
         setArticle(res.data.payload);
       } catch (err) {
@@ -79,10 +79,9 @@ function ArticleByID() {
     if (!window.confirm(confirmMsg)) return;
 
     try {
-      const res = await axios.patch(
+      const res = await apiClient.patch(
         "/author-api/articles",
-        { articleId: article._id, isArticleActive: newStatus },
-        { withCredentials: true },
+        { articleId: article._id, isArticleActive: newStatus }
       );
 
       console.log("SUCCESS:", res.data);
@@ -115,7 +114,7 @@ function ArticleByID() {
     commentObj.articleId = article._id;
     console.log(commentObj);
     let res = await axios.put("/user-api/articles", commentObj, { withCredentials: true });
-    if (res.status === 200) {
+    if (res.status ==piClient.put("/user-api/articles", commentObj
       
       setArticle(res.data.payload);
     }

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import axios from "axios";
+import apiClient from "../api/axiosConfig";
 import { useEffect, useState } from "react";
 import {
   articleGrid,
@@ -22,7 +22,7 @@ function Home() {
       setLoading(true);
       try {
         // Fetch all published articles
-        let res = await axios.get("https://blogapp-xgks.onrender.com/user-api/articles", { withCredentials: true });
+        let res = await apiClient.get("/user-api/articles");
         if (res.status === 200) {
           setArticles(res.data.payload);
         }

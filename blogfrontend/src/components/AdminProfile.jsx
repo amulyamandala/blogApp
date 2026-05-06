@@ -1,5 +1,5 @@
 import { useAuth } from "../store/authStore";
-import axios from "axios";
+import apiClient from "../api/axiosConfig";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {
@@ -38,8 +38,8 @@ function AdminProfile() {
     setError(null);
     try {
       const [usersRes, articlesRes] = await Promise.all([
-        axios.get("/admin-api/users", { withCredentials: true }),
-        axios.get("/admin-api/articles", { withCredentials: true }),
+        apiClient.get("/admin-api/users"),
+        apiClient.get("/admin-api/articles"),
       ]);
 
       setUsers(usersRes.data.payload || []);
@@ -65,10 +65,9 @@ function AdminProfile() {
   const toggleUserStatus = async (user) => {
     setUpdatingUserId(user._id);
     try {
-      await axios.patch(
+      await apiClient.patch(
         `/admin-api/user/${user._id}`,
-        { _id: user._id, isActive: !user.isActive },
-        { withCredentials: true }
+        { _id: user._id, isActive: !user.isActive }
       );
       setUsers((prev) =>
         prev.map((u) => (u._id === user._id ? { ...u, isActive: !u.isActive } : u))
