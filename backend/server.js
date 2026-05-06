@@ -14,9 +14,12 @@ const port=process.env.PORT || 5000
 app.use(exp.json())
 app.use(CookieParser())
 app.use(cors({
-    origin:['https://localhost:5173', 'https://blog-3hj4crvfb-amulyamandala007-gmailcoms-projects.vercel.app'],
-    credentials:true,
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://blog-app-git-main-amulyamandala007-gmailcoms-projects.vercel.app"
+  ],
+  credentials: true
+}));
 app.use("/user-api",UserApp)
 app.use("/common-api",CommonApp)
 app.use("/admin-api",AdminApp)
