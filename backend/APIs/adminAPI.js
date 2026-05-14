@@ -28,3 +28,18 @@ AdminApp.patch("/user/:id",verifyToken("ADMIN"),async(req,res)=>{
     await user.save()
     res.status(200).json({message:"user status updated",payload:user})
 })
+//delete and restore article
+AdminApp.patch("/articles/:id",verifyToken("ADMIN"),async(req,res)=>{
+    const articleId=req.params.id
+    const {isArticleActive}=req.body
+    const article=await ArticleModel.findById(articleId)
+    if(!article){
+        return res.status(404).json({message:"article not found"})
+    }
+    if(isArticleActive===article.isArticleActive){
+        return res.status(200).json({message:"article already in same state"})
+    }
+    article.isArticleActive=isArticleActive
+    await article.save()
+    res.status(200).json({message:"article status updated",payload:article})
+})

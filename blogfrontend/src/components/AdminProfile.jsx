@@ -27,6 +27,7 @@ function AdminProfile() {
   const [users, setUsers] = useState([]);
   const [articles, setArticles] = useState([]);
   const [updatingUserId, setUpdatingUserId] = useState(null);
+  const [deletingArticleId, setDeletingArticleId] = useState(null);
 
   const handleLogout = async () => {
     await logout();
@@ -76,6 +77,23 @@ function AdminProfile() {
       setError(err.response?.data?.message || "Unable to update user status");
     } finally {
       setUpdatingUserId(null);
+    }
+  };
+
+  const deleteArticle = async (article) => {
+    setDeletingArticleId(article._id);
+    try {
+      await apiClient.patch(
+        `/admin-api/articles/${article._id}`,
+        { isArticleActive: false }
+      );
+      setArticles((prev) =>
+        prev.filter((a) => a._id !== article._id)
+      );
+    } catch (err) {
+      setError(err.response?.data?.message || "Unable to delete article");
+    } finally {
+      setDeletingArticleId(null);
     }
   };
 
@@ -161,6 +179,13 @@ function AdminProfile() {
                     <p className="mt-2">Status: {article.isArticleActive ? "Published" : "Inactive"}</p>
                     <p className={`${timestampClass} mt-3`}>{formatDateIST(article.createdAt)}</p>
                   </div>
+                  <button
+                    className="mt-4 px-3 py-1 text-sm bg-[#cc2f26] text-white rounded-lg hover:bg-[#a8241e] disabled:opacity-50"
+                    onClick={() => deleteArticle(article)}
+                    disabled={deletingArticleId === article._id}
+                  >
+                    {deletingArticleId === article._id ? "Deleting..." : "Delete"}
+                  </button>
                 </div>
               ))}
             </div>
