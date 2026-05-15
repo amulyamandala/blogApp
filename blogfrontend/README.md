@@ -1,16 +1,52 @@
-# React + Vite
+# MyBlog Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the MyBlog platform. It is a single-page application (SPA) built using React and Vite, featuring a modern, responsive user interface with Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Modern UI**: Clean, aesthetic, and responsive design built with React 19 and Tailwind CSS 4.
+- **State Management**: Efficient global state handling using Zustand.
+- **Form Handling**: Robust form validation and management with React Hook Form.
+- **Routing**: Seamless client-side routing using React Router 7.
+- **Notifications**: Interactive toast notifications for user feedback (React Hot Toast & React Toastify).
+- **API Integration**: Simplified and centralized HTTP requests using Axios.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS 4
+- **State Management**: Zustand
+- **Routing**: React Router
+- **HTTP Client**: Axios
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18+)
+- The backend server must be running to provide API data.
+
+### Installation
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5173`.
+
+## Scripts
+
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Bundles the app into static files for production.
+- `npm run lint`: Runs ESLint to find and fix code issues.
+- `npm run preview`: Bootstraps a local static web server to preview the production build.
+
+## Deployment
+
+This application is ready to be deployed on platforms like Vercel or Netlify. A `vercel.json` file is included in the root directory to handle client-side routing rewrites for Vercel deployments.
